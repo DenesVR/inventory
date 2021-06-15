@@ -1,8 +1,13 @@
 import React from 'react';
-import { Box, Grid } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import Sidebar from '../components/Sidebar';
 
 function Home() {
-  return <Grid minH="100vh" bg={'gray.100'}></Grid>;
+  return (
+    <Flex minH="100vh" bg={'gray.100'}>
+      <Sidebar />
+    </Flex>
+  );
 }
 
 export default Home;
