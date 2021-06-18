@@ -4,7 +4,7 @@ import { Box, Menu, MenuItem, VStack, Avatar } from '@chakra-ui/react';
 
 function Sidebar() {
   return (
-    <Box w={'15vw'} pt={'10vh'} bg={'red'} align={'center'}>
+    <Box w={'15vw'} pt={'10vh'} bg={'grey'} align={'center'}>
       <Menu>
         <VStack minH={'70vh'} spacing={2}>
           <MenuItem>

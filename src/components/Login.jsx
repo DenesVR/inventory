@@ -1,5 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Link, Redirect, Switch, Route } from 'react-router-dom';
+import * as Cookies from 'js-cookie';
 import {
   FormControl,
   FormLabel,
@@ -15,10 +17,38 @@ import {
   Grid,
   VStack,
 } from '@chakra-ui/react';
+import Home from '../components/Home';
 
 function Login() {
+  const [submitted, setSubmitted] = useState(false);
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+  const [userValue, setUserValue] = useState({
+    username: '',
+    password: '',
+  });
+
+  if (submitted) {
+    return (
+      // <Redirect
+      //   push
+      //   to={{
+      //     pathname: '/',
+      //   }}
+      // />
+
+      <Switch>
+        <Redirect exact from="/login" to="/" />
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    );
+  }
+
   return (
     <Box textAlign="center" fontSize="xl">
       <Grid minH="100vh" p={3} bg={'gray.100'}>
@@ -29,17 +59,56 @@ function Login() {
                 <Heading>Login</Heading>
               </Stack>
               <Box rounded={'lg'} bg={'white'} p={8}>
-                <form>
+                <form
+                  onSubmit={e => {
+                    e.preventDefault();
+                    //alert("Met succes geregistreerd!");
+                    axios
+                      .post(`http://localhost:8000/api/login_check`, userValue)
+                      .then(res => {
+                        Cookies.set('token', res.data.token, {
+                          expires: 1,
+                          path: '',
+                          secure: true,
+                          sameSite: 'Lax',
+                        });
+                        console.log(res.data);
+                        //Cookies.set('token', res.data.token);
+                        //localStorage.setItem('id', res.data.id);
+                        setSubmitted(true);
+                      })
+                      .catch(error => alert('Deze gebruiker bestaat niet!'));
+
+                    setUserValue({ username: '', password: '' });
+                  }}
+                >
                   <FormControl id="email-login">
                     <FormLabel>Email</FormLabel>
-                    <Input type="email" placeholder="Email" />
+                    <Input
+                      value={userValue.username}
+                      type="email"
+                      placeholder="Email"
+                      onChange={e => {
+                        setUserValue({
+                          ...userValue,
+                          username: e.target.value,
+                        });
+                      }}
+                    />
                   </FormControl>
                   <FormControl id="ww-login">
                     <FormLabel>Password</FormLabel>
                     <InputGroup>
                       <Input
+                        value={userValue.password}
                         type={show ? 'text' : 'password'}
                         placeholder="Password"
+                        onChange={e => {
+                          setUserValue({
+                            ...userValue,
+                            password: e.target.value,
+                          });
+                        }}
                       />
                       <InputRightElement width="4.5rem">
                         <Button h="1.75rem" size="sm" onClick={handleClick}>
