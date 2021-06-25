@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link, Redirect, Switch, Route } from 'react-router-dom';
+import { Link, Redirect, Switch, Route, useHistory } from 'react-router-dom';
 import * as Cookies from 'js-cookie';
 import {
   FormControl,
@@ -19,7 +19,10 @@ import {
 } from '@chakra-ui/react';
 import Home from '../components/Home';
 
+//const token = Cookies.get('token');
+
 function Login() {
+  const history = useHistory();
   const [submitted, setSubmitted] = useState(false);
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -28,25 +31,20 @@ function Login() {
     password: '',
   });
 
-  if (submitted) {
-    return (
-      // <Redirect
-      //   push
-      //   to={{
-      //     pathname: '/',
-      //   }}
-      // />
+  console.log(submitted);
 
-      <Switch>
-        <Redirect exact from="/login" to="/" />
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    );
+  if (submitted) {
+    return <Redirect push to={{ pathname: '/producten' }} />;
+
+    // <Switch>
+    //   <Redirect exact from="/login" to="/" />
+    //   <Route path="/login">
+    //     <Login />
+    //   </Route>
+    //   <Route path="/">
+    //     <Home />
+    //   </Route>
+    // </Switch>
   }
 
   return (
@@ -64,18 +62,25 @@ function Login() {
                     e.preventDefault();
                     //alert("Met succes geregistreerd!");
                     axios
-                      .post(`http://localhost:8000/api/login_check`, userValue)
+                      .post(
+                        `https://wdev2.be/denes21/eindwerk/api/login_check`,
+                        userValue
+                      )
                       .then(res => {
-                        Cookies.set('token', res.data.token, {
-                          expires: 1,
-                          path: '',
-                          secure: true,
-                          sameSite: 'Lax',
-                        });
+                        // Cookies.set('token', res.data.token, {
+                        //   expires: 1,
+                        //   path: '',
+                        //   secure: true,
+                        //   sameSite: 'Lax',
+                        // });
+
+                        //console.log(res.headers('set-cookie'));
                         console.log(res.data);
+
                         //Cookies.set('token', res.data.token);
-                        //localStorage.setItem('id', res.data.id);
+                        localStorage.setItem('token', res.data.token);
                         setSubmitted(true);
+                        //history.push('/');
                       })
                       .catch(error => alert('Deze gebruiker bestaat niet!'));
 

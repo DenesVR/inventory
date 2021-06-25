@@ -5,27 +5,34 @@ import jwt_decode from 'jwt-decode';
 import { Flex } from '@chakra-ui/react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
+import Opbergers from './Opbergers';
+import AddOpberger from './AddOpberger';
 
-const token = Cookies.get('token');
+//const token = Cookies.get('token');
+const token = localStorage.getItem('token');
 let userId = '';
 
+//Authorization: `Bearer ${token}`,
 const authAxios = axios.create({
-  baseURL: `http://localhost:8000/api`,
+  baseURL: `https://wdev2.be/denes21/eindwerk/api`,
   headers: {
     Authorization: `Bearer ${token}`,
   },
 });
 
-if (token) {
-  userId = jwt_decode(token);
-  //console.log(userId.id);
-}
+// if (token) {
+//   userId = jwt_decode(token);
+//   console.log('******');
+//   console.log(userId.id);
+//   console.log('******');
+// }
 
+// ${userId.id}
 function Home() {
   const [user, SetUser] = useState([]);
   useEffect(() => {
     //GET REQUEST
-    authAxios(`/users/${userId.id}`)
+    authAxios(`/users/1`)
       .then(Response => {
         SetUser(Response.data);
         console.log(Response.data);
@@ -41,6 +48,8 @@ function Home() {
   return (
     <Flex minH="100vh" bg={'gray.100'}>
       <Sidebar />
+      <Opbergers />
+      <AddOpberger />
     </Flex>
   );
 }

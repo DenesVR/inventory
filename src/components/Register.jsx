@@ -39,7 +39,10 @@ function Register() {
                     e.preventDefault();
                     //alert("Met succes geregistreerd!");
                     axios
-                      .post(`http://localhost:8000/api/users`, userValue)
+                      .post(
+                        `https://wdev2.be/denes21/eindwerk/api/users`,
+                        userValue
+                      )
                       .then(res => console.log(res))
                       .catch(error => alert('Error!'));
                     setUserValue({
