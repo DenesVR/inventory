@@ -1,14 +1,33 @@
 import React from 'react';
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 
 function OpbergerList({ opberg }) {
   return (
-    <ul>
-      {opberg.map(op => (
-        <li key={op.id}>
-          {op.id} - {op.naam}
-        </li>
-      ))}
-    </ul>
+    <>
+      <Table size="sm">
+        <Thead>
+          <Tr>
+            <Th>id</Th>
+            <Th>naam</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {opberg.map(op => (
+            <Tr key={op.id}>
+              <Td>{op.id}</Td>
+              <Td>{op.naam}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </>
+    // <ul>
+    //   {opberg.map(op => (
+    //     <li key={op.id}>
+    //       {op.id} - {op.naam}
+    //     </li>
+    //   ))}
+    // </ul>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import * as Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Box } from '@chakra-ui/react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Opbergers from './Opbergers';
@@ -48,8 +48,12 @@ function Home() {
   return (
     <Flex minH="100vh" bg={'gray.100'}>
       <Sidebar />
-      <Opbergers />
-      <AddOpberger />
+      <Box>
+        <Opbergers />
+      </Box>
+      <Box>
+        <AddOpberger />
+      </Box>
     </Flex>
   );
 }
