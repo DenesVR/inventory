@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import axios from 'axios';
 import ProductList from './ProductList';
 import { Redirect } from 'react-router-dom';
+import AddProduct from './AddProduct';
 
 const token = localStorage.getItem('token');
 
@@ -33,6 +34,9 @@ function Producten() {
       <Sidebar />
       <Box>
         <ProductList product={product} />
+      </Box>
+      <Box>
+        <AddProduct />
       </Box>
     </Flex>
   );

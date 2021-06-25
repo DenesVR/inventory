@@ -41,7 +41,7 @@ function AddOpberger() {
           setOpberger({ userId: '/api/users/1', naam: '' });
         }}
       >
-        <FormControl id="email-login">
+        <FormControl id="opberger naam">
           <FormLabel>Opberger naam</FormLabel>
           <Input
             value={opberger.naam}
