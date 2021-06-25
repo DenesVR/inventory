@@ -35,16 +35,6 @@ function Login() {
 
   if (submitted) {
     return <Redirect push to={{ pathname: '/producten' }} />;
-
-    // <Switch>
-    //   <Redirect exact from="/login" to="/" />
-    //   <Route path="/login">
-    //     <Login />
-    //   </Route>
-    //   <Route path="/">
-    //     <Home />
-    //   </Route>
-    // </Switch>
   }
 
   return (

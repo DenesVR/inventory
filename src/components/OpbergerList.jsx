@@ -21,13 +21,6 @@ function OpbergerList({ opberg }) {
         </Tbody>
       </Table>
     </>
-    // <ul>
-    //   {opberg.map(op => (
-    //     <li key={op.id}>
-    //       {op.id} - {op.naam}
-    //     </li>
-    //   ))}
-    // </ul>
   );
 }
 

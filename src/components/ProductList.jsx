@@ -3,13 +3,6 @@ import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 
 function ProductList({ product }) {
   return (
-    // <ul>
-    //   {product.map(p => (
-    //     <li key={p.id}>
-    //       {p.id} - {p.naam} - {p.beschrijving}
-    //     </li>
-    //   ))}
-    // </ul>
     <>
       <Table size="sm">
         <Thead>

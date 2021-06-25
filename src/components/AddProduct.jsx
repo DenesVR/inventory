@@ -18,16 +18,11 @@ function AddProduct() {
         onSubmit={e => {
           e.preventDefault();
           axios
-            .post(
-              `https://wdev2.be/denes21/eindwerk/api/productens`,
-              product,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-              // opberger
-            )
+            .post(`https://wdev2.be/denes21/eindwerk/api/productens`, product, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
             .then(res => {
               console.log(res.data);
             })

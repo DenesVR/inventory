@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Box,
-} from '@chakra-ui/react';
 import OpbergerList from './OpbergerList';
 
 const token = localStorage.getItem('token');
